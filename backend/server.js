@@ -7,9 +7,11 @@ import authRoutes from './routes/authRoutes.js';
 dotenv.config();
 const app = express();
 
+// Middlewares
 app.use(express.json());
 app.use(cors());
 
+// Routes
 app.use('/api/auth', authRoutes);
 
 // MongoDB Connection
@@ -19,12 +21,12 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('✅ MongoDB Connected'))
-  .catch((err) => console.log(err));
+  .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
-  
-app.get("/" ,(req,res) => {
-  res.send('hello server');
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Hello from the backend!');
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
