@@ -39,8 +39,8 @@ function App() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <input
-            type="email"
-            placeholder="Email"
+            type="username"
+            placeholder="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -56,7 +56,7 @@ function App() {
           />
           <button
             type="submit"
-            className="w-full py-3 font-bold text-white transition rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90"
+            className="w-full py-3 font-bold text-white transition bg-blue-500 rounded-lg hover:opacity-90"
           >
             Log In
           </button>
