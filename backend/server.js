@@ -22,7 +22,7 @@ mongoose
   .catch((err) => console.log(err));
 
   
-app.get((req, res) => {
+app.get("/" ,(req,res) => {
   res.send('hello server');
 });
 
