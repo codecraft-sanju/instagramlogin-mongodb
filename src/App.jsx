@@ -24,27 +24,18 @@ function App() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="p-8 text-center bg-white rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-96">
         {/* Instagram Logo */}
         <div className="flex justify-center mb-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-12 h-12 text-pink-500"
-          >
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+            alt="Instagram"
+            className="w-16"
+          />
         </div>
 
-        <h2 className="mb-4 text-3xl font-bold text-gray-800">Instagram</h2>
+        <h2 className="mb-6 text-3xl font-bold text-gray-800">Instagram</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <input
@@ -53,7 +44,7 @@ function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <input
             type="password"
@@ -61,20 +52,20 @@ function App() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <button
             type="submit"
-            className="w-full py-3 text-white transition rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90"
+            className="w-full py-3 font-bold text-white transition rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90"
           >
-            Login
+            Log In
           </button>
         </form>
 
         <div className="mt-6 text-sm text-gray-600">
           <p>
             Don't have an account?{' '}
-            <a href="#" className="text-blue-500 hover:underline">
+            <a href="#" className="font-bold text-blue-500 hover:underline">
               Sign up
             </a>
           </p>
