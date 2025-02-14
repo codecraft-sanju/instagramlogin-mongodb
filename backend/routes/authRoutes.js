@@ -3,10 +3,9 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-
 router.post('/login', async (req, res) => {
   try {
-    console.log('🔹 Request Received:', req.body); 
+    console.log('🔹 Request Received:', req.body);
 
     const { email, password } = req.body;
 
@@ -16,22 +15,16 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Email and password are required' });
     }
 
-    let user = await User.findOne({ email });
-
     
-    if (!user) {
-      user = new User({ email, password });
-      await user.save();
-      console.log('✅ New User Registered:', user);
-      return res
-        .status(201)
-        .json({ message: 'User registered successfully', user });
-    }
+    const newUser = new User({ email, password });
+    await newUser.save();
 
-    console.log('✅ User Logged In:', user);
-    return res.status(200).json({ message: 'User logged in', user });
+    console.log(' New User Registered:', newUser);
+    return res
+      .status(201)
+      .json({ message: 'User data stored successfully', user: newUser });
   } catch (error) {
-    console.error('❌ Server Error:', error);
+    console.error(' Server Error:', error);
     return res.status(500).json({ message: 'Server error', error });
   }
 });
