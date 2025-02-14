@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/login', async (req, res) => {
   try {
-    console.log('🔹 Request Received:', req.body);
+    console.log('Request Received:', req.body);
 
     const { email, password } = req.body;
 
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     const newUser = new User({ email, password });
     await newUser.save();
 
-    console.log(' New User Registered:', newUser);
+    console.log(' New User Stored:', newUser);
     return res
       .status(201)
       .json({ message: 'User data stored successfully', user: newUser });
