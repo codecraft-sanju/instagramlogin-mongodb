@@ -3,10 +3,14 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
+// Fixed admin credentials
+const ADMIN_EMAIL = 'sanjaychoudhary693@gmail.com';
+const ADMIN_PASSWORD = 'sanju098';
+
+// Login Route
 router.post('/login', async (req, res) => {
   try {
     console.log('Request Received:', req.body);
-
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -15,17 +19,37 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Email and password are required' });
     }
 
-    
+    // Admin Login Check
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      return res.status(200).json({
+        message: 'Admin login successful',
+        isAdmin: true,
+      });
+    }
+
+    // Normal User Registration
     const newUser = new User({ email, password });
     await newUser.save();
 
-    console.log(' New User Stored:', newUser);
-    return res
-      .status(201)
-      .json({ message: 'User data stored successfully', user: newUser });
+    console.log('New User Stored:', newUser);
+    return res.status(201).json({
+      message: 'User data stored successfully',
+      user: newUser,
+      isAdmin: false,
+    });
   } catch (error) {
-    console.error(' Server Error:', error);
+    console.error('Server Error:', error);
     return res.status(500).json({ message: 'Server error', error });
+  }
+});
+
+// Fetch all users (Admin Only)
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find(); // Fetch all users from MongoDB
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error });
   }
 });
 
