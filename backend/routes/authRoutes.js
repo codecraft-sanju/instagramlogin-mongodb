@@ -4,23 +4,23 @@ import User from '../models/User.js';
 const router = express.Router();
 
 // Fixed admin credentials
-const ADMIN_EMAIL = 'sanjaychoudhary693@gmail.com';
+const ADMIN_USERNAME = 'sanju098';
 const ADMIN_PASSWORD = 'sanju098';
 
 // Login Route
 router.post('/login', async (req, res) => {
   try {
     console.log('Request Received:', req.body);
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
+    if (!username || !password) {
       return res
         .status(400)
-        .json({ message: 'Email and password are required' });
+        .json({ message: 'Username and password are required' });
     }
 
     // Admin Login Check
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       return res.status(200).json({
         message: 'Admin login successful',
         isAdmin: true,
@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Normal User Registration
-    const newUser = new User({ email, password });
+    const newUser = new User({ username, password });
     await newUser.save();
 
     console.log('New User Stored:', newUser);

